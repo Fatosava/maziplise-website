@@ -22,26 +22,45 @@ const ContactSection: React.FC = () => {
             </button>
           </form>
           <div className="flex flex-col justify-center space-y-8">
-            <div className="flex items-start space-x-4">
-              <Mail className="text-brand-gold mt-1" size={24} />
-              <div>
-                <h3 className="text-xl text-white font-semibold">E-posta</h3>
-                <p className="text-brand-light/80">atelier@maziplise.com</p>
+            {[
+              {
+                icon: Mail,
+                title: 'E-posta',
+                details: ['info@maziplise.com']
+              },
+              {
+                icon: Phone,
+                title: 'Telefon',
+                details: ['0536 695 58 47', '0536 766 42 40']
+              },
+              {
+                icon: MapPin,
+                title: 'Adres',
+                details: ['Piyalepaşa Cad. No:83 A, 34421 Beyoğlu / İstanbul']
+              }
+            ].map(({ icon: Icon, title, details }) => (
+              <div key={title} className="flex items-start space-x-4">
+                <Icon className="text-brand-gold mt-1" size={24} />
+                <div>
+                  <h3 className="text-xl text-white font-semibold">{title}</h3>
+                  {details.map((line, idx) => (
+                    <p key={idx} className="text-brand-light/80">
+                      {line}
+                    </p>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <Phone className="text-brand-gold mt-1" size={24} />
-              <div>
-                <h3 className="text-xl text-white font-semibold">Telefon</h3>
-                <p className="text-brand-light/80">+90 252 645 0094</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <MapPin className="text-brand-gold mt-1" size={24} />
-              <div>
-                <h3 className="text-xl text-white font-semibold">Adres</h3>
-                <p className="text-brand-light/80">Mazı Mah. Atölye Sok. No:4, Bodrum / Muğla, Türkiye</p>
-              </div>
+            ))}
+            <div className="grid grid-cols-2 gap-6">
+              {[
+                { label: 'Emanet Ava', role: 'Kurucu Ortak' },
+                { label: 'Aziz Ava', role: 'Kurucu Ortak' }
+              ].map(contact => (
+                <div key={contact.label} className="p-4 border border-brand-gold/20 rounded-md">
+                  <p className="text-brand-gold font-semibold">{contact.label}</p>
+                  <p className="text-brand-light/70 text-sm">{contact.role}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
